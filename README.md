@@ -15,12 +15,12 @@ This project is video-only (no audio, no device control).
 2. It starts `scrcpy` and tells it to `--record` to that pipe in `mkv` format.
 3. It starts `ffmpeg` to read the MKV stream from the pipe and output a raw H.264 Annex-B bytestream to stdout.
 4. A WebSocket server (`ws://localhost:8081`) broadcasts the H.264 chunks to any connected browser clients.
-5. `android.html` connects to the WebSocket, splits the incoming bytes into H.264 NAL units (by start codes), waits for SPS/PPS, configures a `VideoDecoder`, then feeds frames into WebCodecs and draws decoded frames to a `<canvas>`.
+5. `index.html` connects to the WebSocket, splits the incoming bytes into H.264 NAL units (by start codes), waits for SPS/PPS, configures a `VideoDecoder`, then feeds frames into WebCodecs and draws decoded frames to a `<canvas>`.
 
 Files:
 
 - [server.cjs](file:///Users/fahri/Projects/Autozone/android-mirror/server.cjs) — scrcpy + ffmpeg + WebSocket broadcaster
-- [android.html](file:///Users/fahri/Projects/Autozone/android-mirror/android.html) — WebSocket receiver + H.264 parsing + WebCodecs decoding
+- [index.html](file:///Users/fahri/Projects/Autozone/android-mirror/index.html) — WebSocket receiver + H.264 parsing + WebCodecs decoding
 
 ## Requirements
 
@@ -82,11 +82,11 @@ Option A (recommended): serve it over localhost (helps avoid browser security li
 npx serve .
 ```
 
-Then open the shown URL in Chrome/Edge and click `android.html` (or open `/android.html` directly if your server supports it).
+Then open the shown URL in Chrome/Edge and click `index.html` (or open `/index.html` directly if your server supports it).
 
 Option B: open the file directly:
 
-- Open [android.html](file:///Users/fahri/Projects/Autozone/android-mirror/android.html) in your browser.
+- Open [index.html](file:///Users/fahri/Projects/Autozone/android-mirror/index.html) in your browser.
 
 The page connects to `ws://localhost:8081`, then starts showing frames once it receives a keyframe.
 
