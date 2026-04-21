@@ -23,7 +23,7 @@ async function start() {
     "--no-control",
     "--no-playback",
     `--record=${PIPE_PATH}`,
-    "--record-format=mkv",  // ✅ mkv supports streaming/non-seekable output
+    "--record-format=mkv",
     "--max-fps=30",
     "--max-size=1280",
     "--video-bit-rate=2M",
