@@ -323,7 +323,6 @@
         ws.onmessage = (e) => {
           const incoming = new Uint8Array(e.data);
 
-          // ✅ Confirm data is arriving
           if (naluBuffer.length === 0 && incoming.length > 0) {
             log(
               `First data chunk: ${incoming.length} bytes, starts: ${incoming[0].toString(16)} ${incoming[1].toString(16)} ${incoming[2].toString(16)} ${incoming[3].toString(16)}`,
@@ -334,7 +333,7 @@
           const starts = findStarts(naluBuffer);
           if (starts.length < 2) return;
 
-          // ✅ Fix: .pos
+          
           const completeEnd = starts[starts.length - 1].pos;
           processNalus(naluBuffer.slice(0, completeEnd));
           naluBuffer = naluBuffer.slice(completeEnd);
@@ -344,7 +343,7 @@
       }
 
       if (sps) {
-        initDecoder(buildCodecString(sps)); // ✅ no second arg
+        initDecoder(buildCodecString(sps));
         setStatus("connected", "Decoder ready...");
         for (const c of pendingChunks) submitChunk(c);
         pendingChunks = [];
